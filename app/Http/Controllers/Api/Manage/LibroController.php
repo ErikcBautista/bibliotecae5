@@ -92,7 +92,8 @@ class LibroController extends Controller
         $post = Libros::find($id);
         Validator::make($request->all(), [
             'title' => 'max:50',
-            'image' => 'image|max:1024',
+            'idioma' => 'max:20',
+            'archivo' => 'image|max:1024',
             'description' => 'max:200',
         ])->validate();
         if(Auth::user()->rol == "Cliente")
@@ -106,9 +107,9 @@ class LibroController extends Controller
         if(!empty($request->input('title'))){
             $post -> title= $request->input('title');
         }
-        if(!empty($request->file('image'))){
-            $url_image = $this->upload($request->file('image'));
-            $post -> image = $url_image;
+        if(!empty($request->file('archivo'))){
+            $url_image = $this->upload($request->file('archivo'));
+            $post -> archivo = $url_image;
         }
         if(!empty($request->input('description'))){
             $post -> description= $request->input('description');
